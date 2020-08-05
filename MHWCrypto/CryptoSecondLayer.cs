@@ -1,4 +1,4 @@
-﻿// Unmodified copy of https://github.com/Fusion86/Cirilla/blob/master/src/Cirilla.Core/Crypto/IceborneCrypto.cs
+﻿// Almost unmodified copy of https://github.com/Fusion86/Cirilla/blob/master/src/Cirilla.Core/Crypto/IceborneCrypto.cs
 
 using System.Security.Cryptography;
 
@@ -6,7 +6,7 @@ namespace Cirilla.Core.Crypto
 {
     public static class IceborneCrypto
     {
-        private static uint[] INTEGER_CONSTANTS = {
+        private static readonly uint[] INTEGER_CONSTANTS = {
             0xe935ae79, 0x5766eb6d, 0x610cac54, 0xf482ba5d, 0xedf65227, 0xc59d7221, 0x9973c2ee, 0xb954c703, 0x511af53b, 0xe6c418f3, 0xf505b00c, 0x6d63738a, 0xfed58c15, 0x084a75c4, 0xbf219bf5, 0x1697be71, 0x70262ee4, 0xd08d28b9, 0xdb70b945, 0x40962861, 0x076597c9, 0x48244d4d, 0x42071403, 0x784e89ae, 0xdf0b0d89, 0x8062c2b7, 0x3226320f, 0xd8041479, 0x1d0dba31, 0xa8f67913, 0x6d86a770, 0x2a98400d,
             0x89976f71, 0xbbce0c1d, 0xaf2faa27, 0x93c2e10c, 0x5f82e3a6, 0x6c3ad1d6, 0x4a69835f, 0x77721213, 0x885c89a1, 0x56334d84, 0x1ddecd44, 0xde525928, 0xd2c661da, 0x1a539ac0, 0xe5031ebe, 0x975b3c4d, 0xcc28dd37, 0x07eca88c, 0xe338a216, 0x267ac765, 0xdd7e48c5, 0xd5a1cc33, 0x92b104a9, 0x2f446603, 0xda2159cc, 0x8e85eb0f, 0x4211d5ef, 0xf221cef3, 0x1058db37, 0xf564415c, 0xaee2c9a5, 0x78cd7a39,
             0x83e03693, 0x4b20ff5e, 0x6ad692d2, 0x12086bec, 0x715191a8, 0xe84c8f0b, 0x8dc36f82, 0x7d73ddbf, 0xf0fc17d6, 0x3d5818bf, 0xfc8a91c1, 0xc5fba0b7, 0x88879ee7, 0xbd1c7285, 0x79ca6141, 0x18dadf1d, 0x8a719573, 0xb01fc8d0, 0x448f1fe7, 0x0f045d99, 0x081c6349, 0xa2b8b412, 0xa0a31d41, 0x0142149e, 0x90afafe0, 0xa292e4de, 0x9296e661, 0x8fa6669e, 0x8d4540a3, 0xe386b4e7, 0xd0600dbb, 0xb9c255b3,
@@ -137,7 +137,7 @@ namespace Cirilla.Core.Crypto
             0x13f2ea5f, 0x006e2b71, 0xb03a41ee, 0xf3b2eb3f, 0x999d2af8, 0x8d2c6656, 0x2e1abd3b, 0x7da5cefc, 0x60d36aa3, 0x965c8734, 0x6ad0d853, 0xb93d248f, 0x0e58d231, 0xd7797aee, 0x628c9bc3, 0xa4bbb4f0, 0xc080c6e0, 0x454088dd, 0x03203e6d, 0x2005e1b8, 0xf7a6ddf9, 0xdb820df2, 0x45a2e231, 0xbe0bcf8d, 0x35923b66, 0x422c2292, 0xe2cc0c18, 0x03f48beb, 0x0701c163, 0x25d019d1, 0x88a74c7b, 0x7e9cb72e
         };
 
-        private static float[] FLOAT_CONSTANTS = {
+        private static readonly float[] FLOAT_CONSTANTS = {
             0.120002F, 0.98657F, 0.722385F, 0.167307F, 0.01099F, 0.69451F, 0.783851F, 0.676534F, 0.205887F, 0.347737F, 0.686114F, 0.434551F, 0.302053F, 0.549133F, 0.225536F, 0.483361F, 0.693883F, 0.799498F, 0.065586F, 0.671937F, 0.693111F, 0.246235F, 0.607265F, 0.353497F, 0.501309F, 0.988425F, 0.338359F, 0.1549F, 0.48125F, 0.310782F, 0.786255F, 0.16761F,
             0.010879F, 0.803485F, 0.148728F, 0.791803F, 0.608308F, 0.80364F, 0.774651F, 0.249656F, 0.317713F, 0.995945F, 0.053474F, 0.875161F, 0.073479F, 0.665095F, 0.436491F, 0.140379F, 0.104735F, 0.397575F, 0.312075F, 0.119031F, 0.707183F, 0.209307F, 0.555252F, 0.578763F, 0.505198F, 0.212205F, 0.838087F, 0.208028F, 0.054213F, 0.866434F, 0.023573F, 0.551242F,
             0.687173F, 0.999776F, 0.127175F, 0.590792F, 0.18883F, 0.469513F, 0.778861F, 0.043963F, 0.795599F, 0.045703F, 0.78827F, 0.151467F, 0.698835F, 0.570437F, 0.36227F, 0.721216F, 0.232438F, 0.59951F, 0.61242F, 0.075392F, 0.555247F, 0.906975F, 0.087032F, 0.354485F, 0.353827F, 0.704468F, 0.135991F, 0.822222F, 0.570476F, 0.163423F, 0.241411F, 0.101961F,
@@ -290,7 +290,7 @@ namespace Cirilla.Core.Crypto
             {
                 int saltOffset = 0;
                 aes.Key = keys[i];
-                using (var decryptor = aes.CreateDecryptor())
+                using (ICryptoTransform decryptor = aes.CreateDecryptor())
                 {
                     while (dataOffset < keyLength[i] + offset)
                     {
@@ -346,7 +346,7 @@ namespace Cirilla.Core.Crypto
             {
                 int saltOffset = 0;
                 aes.Key = keys[i];
-                using (var encryptor = aes.CreateEncryptor())
+                using (ICryptoTransform encryptor = aes.CreateEncryptor())
                 {
                     while (dataOffset < keyLength[i] + offset)
                     {
@@ -408,7 +408,7 @@ namespace Cirilla.Core.Crypto
         private static void GenerateSalt(byte[] salt, uint keySalt)
         {
             uint c = keySalt ^ 0x4bf0cf23;
-            uint s = 0;
+            uint s;
             uint offset = 0x5d7;
             uint offsetChange = (keySalt >> 0x18) + (keySalt >> 0x10 & 0xFF) + (keySalt >> 0x8 & 0xFF) + (keySalt & 0xFF) + 1;
             for (int i = 0; i < 0x200; i += 4)
